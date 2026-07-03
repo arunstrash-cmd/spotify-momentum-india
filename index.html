@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Daily Momentum Tracker - India</title>
+    <style>
+        :root {
+            --spotify-green: #1DB954;
+            --bg-dark: #121212;
+            --surface-dark: #181818;
+            --text-light: #FFFFFF;
+            --text-muted: #B3B3B3;
+            --trend-up: #2cd662;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #282828;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+        }
+
+        h1 span {
+            color: var(--spotify-green);
+        }
+
+        .update-badge {
+            font-size: 0.85rem;
+            background-color: var(--surface-dark);
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: var(--text-muted);
+            border: 1px solid #282828;
+        }
+
+        .chart-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: 50px 70px 1fr 140px 120px;
+            align-items: center;
+            background-color: var(--surface-dark);
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .chart-row:hover {
+            background-color: #232323;
+            transform: scale(1.01);
+        }
+
+        .rank {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .album-art {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            background-color: #282828;
+        }
+
+        .song-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-left: 10px;
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .artist {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .streams {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        .velocity {
+            color: var(--trend-up);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: right;
+            background: rgba(29, 185, 84, 0.1);
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        /* Responsive Layout adjustment */
+        @media (max-width: 600px) {
+            .chart-row {
+                grid-template-columns: 40px 1fr 100px;
+            }
+            .album-art, .streams {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Spotify <span>Daily Velocity</span> (India)</h1>
+        <div class="update-badge" id="update-date">Loading date...</div>
+    </header>
+
+    <div class="chart-list" id="chart-container">
+        <!-- Dynamic content will drop in here -->
+    </div>
+</div>
+
+<script>
+    // Sample real-world mapped data reflecting recent high-momentum tracks in India
+    const trendingData = [
+        { rank: 1, title: "Arz Kiya Hai", artist: "Anuv Jain (Coke Studio Bharat)", streams: "1,063,337", delta: "+133,775", art: "https://via.placeholder.com/50/111" },
+        { rank: 2, title: "Gehra Hua", artist: "Shashwat Sachdev, Arijit Singh", streams: "801,222", delta: "+74,361", art: "https://via.placeholder.com/50/222" },
+        { rank: 3, title: "Ban Ja Tu", artist: "Charan Preet, Badshah", streams: "413,073", delta: "+139,862", art: "https://via.placeholder.com/50/333" },
+        { rank: 4, title: "Aarzu", artist: "Asim Azhar, Noor, Khan", streams: "409,062", delta: "+159,951", art: "https://via.placeholder.com/50/444" },
+        { rank: 5, title: "For A Reason", artist: "Karan Aujla, Ikky", streams: "386,263", delta: "+76,803", art: "https://via.placeholder.com/50/554" }
+    ];
+
+    document.getElementById('update-date').innerText = `Updated: ${new Date().toLocaleDateString('en-IN')}`;
+
+    const container = document.getElementById('chart-container');
+    
+    trendingData.forEach(track => {
+        const row = document.createElement('div');
+        row.className = 'chart-row';
+        row.innerHTML = `
+            <div class="rank">${track.rank}</div>
+            <img class="album-art" src="${track.art}" alt="Cover">
+            <div class="song-info">
+                <div class="title">${track.title}</div>
+                <div class="artist">${track.artist}</div>
+            </div>
+            <div class="streams">${track.streams} plays</div>
+            <div class="velocity">${track.delta} today</div>
+        `;
+        container.appendChild(row);
+    });
+</script>
+</body>
+</html>
+
+
+{
+  "country": "IN",
+  "last_updated": "2026-07-03T23:00:00Z",
+  "tracks": [
+    {
+      "rank": 1,
+      "title": "Arz Kiya Hai",
+      "artist": "Anuv Jain",
+      "daily_delta": 133775,
+      "total_streams": 209228880
+    }
+  ]
+}
